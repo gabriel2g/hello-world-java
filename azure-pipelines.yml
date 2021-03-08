@@ -12,8 +12,22 @@ pool:
 
 
 steps:
+
+
+- task: SonarQubePrepare@4
+  inputs:
+    SonarQube: 'sonarAKS'
+    scannerMode: 'CLI'
+    configMode: 'file'
+
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
+
+- task: SonarQubeAnalyze@4
+
+- task: SonarQubePublish@4
+  inputs:
+    pollingTimeoutSec: '300'
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.
